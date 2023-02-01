@@ -3,8 +3,10 @@ package com.example.usupbekov_adilet_homework_2_7;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,14 +17,25 @@ public class MainActivity extends AppCompatActivity {
     private String operation;
 
 
-    @SuppressLint("MissingInflatedId")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.text_view);
+        Button button = findViewById(R.id.cnopka_2);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,MainActivityTwo.class);
+                String text = textView.getText().toString();
+                intent.putExtra("ren",text);
+                startActivity(intent);
+            }
+        });
 
     }
+
 
     public void onNumberClick(View view) {
         switch (view.getId()){
@@ -119,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                         setFirstVar();
                         operation = "/";
                         break;
+                        case R.id.cnopka_2:
 
             case R.id.btn_equal:
                setSecondVar();
@@ -142,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                        textView.setText(result.toString());
                        break;
                }
+                ((Button)findViewById(R.id.cnopka_2)).setVisibility(View.VISIBLE);
 
 
         }
@@ -153,4 +168,7 @@ public class MainActivity extends AppCompatActivity {
     public void setSecondVar(){
         second = Double.parseDouble(textView.getText().toString());
     }
+
+
+
 }
